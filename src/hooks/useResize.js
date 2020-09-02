@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setSize } from '../store/main';
 import changeClass from '../util/changeClass';
+import _debounce from 'lodash.debounce';
 
 /**
  * window resize시 작동하는 hook
@@ -16,7 +17,7 @@ function useResize() {
       changeClass(window.innerWidth);
     }
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener('resize', _debounce(handleResize, 200));
     // load시 실행
     handleResize();
 
