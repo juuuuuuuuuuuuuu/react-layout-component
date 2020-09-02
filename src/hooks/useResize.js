@@ -1,20 +1,26 @@
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { setSize } from '../store/main';
+import changeClass from '../util/changeClass';
+
 /**
- * resize hook
- * (브라우저 넓이(width)가 768px 이하로 축소될 때 클래스 수정)
+ * window resize시 작동하는 hook
  */
 function useResize() {
-  window.addEventListener('load', handleResize);
-  window.addEventListener('resize', handleResize);
+  const disaptch = useDispatch();
 
-  function handleResize() {
-    const width = window.innerWidth;
-
-    if (width < 768) {
-      document.querySelector('body').className = 'page-small';
-    } else {
-      document.querySelector('body').className = 'page';
-      document.querySelector('body').className = '';
+  useEffect(() => {
+    function handleResize() {
+      disaptch(setSize({ width: window.innerWidth, height: window.innerHeight }));
+      // width 사이즈에 따라 body 클래스 변경
+      changeClass(window.innerWidth);
     }
-  }
+
+    window.addEventListener('resize', handleResize);
+    // load시 실행
+    handleResize();
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 }
 export default useResize;

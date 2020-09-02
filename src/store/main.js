@@ -12,16 +12,24 @@ const mainSlice = createSlice({
   name: 'page',
   initialState: {
     menu: Menu[0],
+    size: {
+      width: 0,
+      height: 0,
+    },
   },
   reducers: {
     // 페이지 이동시 리듀서
     setPage(state, action) {
       state.menu =  Menu[action.payload];
     },
+    setSize(state, action) {
+      state.size = action.payload;
+    },
   }
 });
 
-export const { setPage } = mainSlice.actions;
+export const { setPage, setSize } = mainSlice.actions;
 export const selectedMenu = state => state.main.menu;
+export const windowSize = state => state.main.size;
 export default mainSlice.reducer;
 
