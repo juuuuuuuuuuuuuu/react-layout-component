@@ -12,8 +12,12 @@ function useLocation() {
 
   function handleRouter(path) {
     dispatch(setPage(path));
+  }
+
+  function historyPush(path) {
     history.push({ pathname: `page${path + 1}`})
   }
-  return { handleRouter }
+
+  return { handleRouter, historyPush }
 }
 export default useLocation;

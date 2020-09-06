@@ -6,7 +6,7 @@ import useLocation from '../hooks/useLocation';
 function Navigation() {
   const data = useSelector(selectedMenu);
   // 커스텀 hook
-  const { handleRouter } = useLocation();
+  const { handleRouter, historyPush } = useLocation();
 
   /**
    * 페이지 이동시 호출되는 콜백함수
@@ -17,6 +17,7 @@ function Navigation() {
     e.preventDefault();
     // 페이지 이동
     handleRouter(index);
+    historyPush(index)
   }
 
   return (

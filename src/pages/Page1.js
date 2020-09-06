@@ -1,9 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useHistory } from 'react-router-dom'
 import { useSelector } from 'react-redux';
 import { windowSize } from '../store/main';
+import useLocation from '../hooks/useLocation';
+
 
 function Page1() {
   const { height } = useSelector(windowSize);
+  const path = useHistory().location.pathname.replace(/[^0-9]/g,'');
+
+  // 커스텀 hook
+  const { handleRouter } = useLocation();
+
+  useEffect(() => {
+    handleRouter(path - 1);
+  }, []);
 
   return (
     <div id="wrapper" style={{ minHeight: `${height}px` }}>

@@ -6,7 +6,7 @@ function MobileNavigation() {
   // 메뉴 open 여부
   const [open, setOpen] = useState(false);
   // 커스텀 hook
-  const { handleRouter } = useLocation();
+  const { handleRouter, historyPush } = useLocation();
 
   /**
    * 페이지 이동시 호출되는 콜백함수
@@ -17,6 +17,7 @@ function MobileNavigation() {
     e.preventDefault();
     // 페이지 이동
     handleRouter(index);
+    historyPush(index);
     // 버튼 off 처리
     handleButton();
   }
